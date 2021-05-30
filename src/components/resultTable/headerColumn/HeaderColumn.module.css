@@ -1,0 +1,7 @@
+.columnHeader {
+  cursor: pointer;
+}
+
+.columnHeader:hover {
+  background-color: #eee;
+}

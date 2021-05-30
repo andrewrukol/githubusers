@@ -1,0 +1,9 @@
+.image {
+  width: 100%;
+  opacity: 0;
+  transition: opacity 300ms linear;
+}
+
+.visible {
+  opacity: 1;
+}
