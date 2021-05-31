@@ -8,6 +8,8 @@ export interface ImageWrapperProps {
   src: string;
 }
 
+export const IMAGE_TEST_ID = "image-test-id";
+
 export const Image: React.FC<ImageWrapperProps> = ({ src }) => {
   const [ isLoaded, setIsLoaded ] = React.useState<boolean>(false);
   const loadHandler = React.useCallback(
@@ -21,6 +23,7 @@ export const Image: React.FC<ImageWrapperProps> = ({ src }) => {
       className={`${styles.image} ${isLoaded ? styles.visible : ""}`}
       src={src}
       rounded
+      data-testid={IMAGE_TEST_ID}
       onLoad={loadHandler}
     />
   );

@@ -1,29 +1,30 @@
 import React from 'react';
 
 import Table from 'react-bootstrap/Table';
-import type { SearchResult, SearchResultItem, Sorting } from '../../types';
+import type { SearchResultItem, Sorting } from '../../types';
 import { createNewSorting, getSortDirection } from '../../utils/sorting';
 import { Pagination } from '../pagination/Pagination';
 import { HeaderColumn } from './headerColumn/HeaderColumn';
 import { getAmountOfPages } from '../../utils/pagination';
-import { COLUMNS_CONFIG, INITIAL_SORTING, ITEMS_PER_PAGE } from './consts';
+import { COLUMNS_CONFIG, INITIAL_SORTING } from './consts';
 import { prepareCurrentPageItems, sortResult } from './utils';
 import { Image } from "../image/Image";
 
 import styles from './ResultTable.module.css';
 
 export interface ResultTableProps {
-  result: SearchResult;
+  items: SearchResultItem[];
+  itemsPerPage: number;
 }
 
-export const ResultTable: React.FC<ResultTableProps> = ({ result }) => {
+export const ResultTable: React.FC<ResultTableProps> = ({ items, itemsPerPage }) => {
   const [ pageNumber, setPageNumber ] = React.useState<number>(0);
   const [ sorting, setSorting ] = React.useState<Sorting>(INITIAL_SORTING);
   const [ sortedResult, setSortedResult ] = React.useState<SearchResultItem[]>(
-    sortResult(result, sorting),
+    sortResult(items, sorting),
   );
   const [ currentPageItems, setcurrentPageItems ] = React.useState<SearchResultItem[]>(
-    prepareCurrentPageItems(sortedResult, pageNumber),
+    prepareCurrentPageItems(sortedResult, pageNumber, itemsPerPage),
   );
   const pageChangeHandler = React.useCallback(
     (newPageNumber: number) => {
@@ -41,23 +42,23 @@ export const ResultTable: React.FC<ResultTableProps> = ({ result }) => {
 
   React.useEffect(
     () => {
-      setSortedResult(sortResult(result, sorting));
+      setSortedResult(sortResult(items, sorting));
     },
-    [result, sorting, setSortedResult],
+    [items, sorting, setSortedResult],
   );
 
   React.useEffect(
     () => {
-      setcurrentPageItems(prepareCurrentPageItems(sortedResult, pageNumber));
+      setcurrentPageItems(prepareCurrentPageItems(sortedResult, pageNumber, itemsPerPage));
     },
-    [sortedResult, pageNumber, setcurrentPageItems],
+    [sortedResult, pageNumber, setcurrentPageItems, itemsPerPage],
   );
 
   React.useEffect(
     () => {
       setPageNumber(0);
     },
-    [sortedResult, setPageNumber],
+    [items, setPageNumber],
   )
   
   return (
@@ -89,7 +90,7 @@ export const ResultTable: React.FC<ResultTableProps> = ({ result }) => {
         </tbody>
       </Table>
       <Pagination
-        amountOfPages={getAmountOfPages(result.items.length, ITEMS_PER_PAGE)}
+        amountOfPages={getAmountOfPages(items.length, itemsPerPage)}
         active={pageNumber}
         onPageChange={pageChangeHandler}
       />

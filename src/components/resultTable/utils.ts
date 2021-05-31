@@ -1,13 +1,12 @@
-import type { SearchResult, SearchResultItem, Sorting } from "../../types";
+import type { SearchResultItem, Sorting } from "../../types";
 import { sortTextFieldWithDirection } from "../../utils/sorting";
-import { ITEMS_PER_PAGE } from "./consts";
 
-export function sortResult(result: SearchResult, sorting: Sorting) {
-  const sortedResult = [...result.items];
+export function sortResult(items: SearchResultItem[], sorting: Sorting) {
+  const sortedResult = [...items];
   sortedResult.sort(sortTextFieldWithDirection(sorting.field, sorting.order));
   return sortedResult;
 }
 
-export function prepareCurrentPageItems(items: SearchResultItem[], pageNumber: number): SearchResultItem[] {
-  return items.slice(ITEMS_PER_PAGE * pageNumber, ITEMS_PER_PAGE * (pageNumber + 1));
+export function prepareCurrentPageItems(items: SearchResultItem[], pageNumber: number, itemsPerPage: number): SearchResultItem[] {
+  return items.slice(itemsPerPage * pageNumber, itemsPerPage * (pageNumber + 1));
 }

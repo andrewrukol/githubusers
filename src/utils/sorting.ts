@@ -26,6 +26,6 @@ export function createNewSorting(currentSorting: Sorting, field: string): Sortin
   }
 }
 
-export function getSortDirection(sorting: Sorting, field: string) {
+export function getSortDirection(sorting: Sorting, field: string): "ASC" | "DESC" | undefined {
   return sorting.field === field ? sorting.order : undefined
 }

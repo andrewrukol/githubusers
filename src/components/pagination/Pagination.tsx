@@ -8,6 +8,8 @@ export interface PaginationProps {
   onPageChange: (pageNumber: number) => void;
 }
 
+export const PAGINATION_TEST_ID = "pagination-test-id";
+
 export const Pagination: React.FC<PaginationProps> = ({
   amountOfPages,
   active,
@@ -39,7 +41,10 @@ export const Pagination: React.FC<PaginationProps> = ({
     );
   }
   return (
-    <PaginationBootstrap className={"justify-content-center"}>
+    <PaginationBootstrap
+      className={"justify-content-center"}
+      data-testid={PAGINATION_TEST_ID}
+    >
       <PaginationBootstrap.Prev
         disabled={active === 0}
         data-id={active - 1}
@@ -47,7 +52,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       ></PaginationBootstrap.Prev>
       {items}
       <PaginationBootstrap.Next
-      disabled={active === amountOfPages - 1}
+        disabled={active === amountOfPages - 1}
         data-id={active + 1}
         onClick={handleClick}
       ></PaginationBootstrap.Next>
