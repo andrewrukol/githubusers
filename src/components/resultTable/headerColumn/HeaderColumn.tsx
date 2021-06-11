@@ -1,14 +1,15 @@
 import React from 'react';
 
-import { ArrowUp } from 'react-bootstrap-icons';
-import { ArrowDown } from 'react-bootstrap-icons';
+import type { SortDirection } from '../../../types';
 
 import styles from './HeaderColumn.module.css';
+import { useColumnClickHandler } from './hooks';
+import { SortingArrow } from './SortingArrow';
 
 export interface HeaderColumnProps {
   field: string;
   label: string;
-  sortDirection: "ASC" | "DESC" | undefined; 
+  sortDirection: SortDirection; 
   onClick: (field: string) => void;
 }
 
@@ -18,21 +19,7 @@ export const HeaderColumn: React.FC<HeaderColumnProps> = ({
   label,
   sortDirection,
 }) => {
-  const columnClickHandler = React.useCallback(
-    () => {
-      onClick(field);
-    },
-    [onClick, field],
-  );
-
-  let sortingArrow = null;
-  if (sortDirection) {
-    if (sortDirection === "ASC") {
-      sortingArrow = <ArrowDown />;
-    } else {
-      sortingArrow = <ArrowUp />;
-    }
-  }
+  const columnClickHandler = useColumnClickHandler(onClick, field);
 
   return (
     <th
@@ -40,7 +27,7 @@ export const HeaderColumn: React.FC<HeaderColumnProps> = ({
       onClick={columnClickHandler}
     >
         {label}
-        {sortingArrow}
+        <SortingArrow sortDirection={sortDirection} />
     </th>
   );
 }

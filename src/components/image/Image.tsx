@@ -1,6 +1,7 @@
 import React from 'react';
 
 import ImageBootstrap from 'react-bootstrap/Image';
+import { useLoadImage } from './hooks';
 
 import styles from './Image.module.css';
 
@@ -11,13 +12,7 @@ export interface ImageWrapperProps {
 export const IMAGE_TEST_ID = "image-test-id";
 
 export const Image: React.FC<ImageWrapperProps> = ({ src }) => {
-  const [ isLoaded, setIsLoaded ] = React.useState<boolean>(false);
-  const loadHandler = React.useCallback(
-    () => {
-      setIsLoaded(true);
-    },
-    [setIsLoaded],
-  );
+  const { isLoaded, loadHandler } = useLoadImage();
   return (
     <ImageBootstrap
       className={`${styles.image} ${isLoaded ? styles.visible : ""}`}

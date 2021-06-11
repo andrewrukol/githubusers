@@ -5,10 +5,8 @@ export interface AlertProps {
   errorMessage: string;
 }
 
-export const Alert: React.FC<AlertProps> = ({ errorMessage }) => {
-  return (
+export const Alert: React.FC<AlertProps> = ({ errorMessage }) =>(
     <AlertBootstrap variant={"danger"}>
       {errorMessage}
     </AlertBootstrap>
   );
-};

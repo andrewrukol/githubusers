@@ -16,3 +16,5 @@ export interface Sorting {
   field: string;
   order: SortOrder;
 }
+
+export type SortDirection = "ASC" | "DESC" | undefined;

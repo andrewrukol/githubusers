@@ -1,3 +1,12 @@
+# GitHub users
+
+This is a simple project for practicing and serving as a code example.
+
+In this project there is a simple requirement:
+- Provide input field to enter search query
+- Display found users in a table
+- The table should contain three columns: avatar url, user login, and search result type
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
