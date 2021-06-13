@@ -1,7 +1,6 @@
 import React from 'react';
 
 import type { SortDirection } from '../../../types';
-
 import styles from './HeaderColumn.module.css';
 import { useColumnClickHandler } from './hooks';
 import { SortingArrow } from './SortingArrow';

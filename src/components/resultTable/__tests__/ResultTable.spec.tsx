@@ -1,4 +1,3 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import { ResultTable } from '../ResultTable';
 import { PAGINATION_TEST_ID } from '../../pagination/Pagination';
