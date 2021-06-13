@@ -1,5 +1,4 @@
 import { fireEvent, render } from '@testing-library/react';
-import type { SortDirection } from '../../../../types';
 import { HeaderColumn, HeaderColumnProps } from '../HeaderColumn';
 
 describe("components/resultTable/headerColumn/HeaderColumn", () => {
