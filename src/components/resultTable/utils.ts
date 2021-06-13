@@ -1,7 +1,7 @@
 import type { SearchResultItem, Sorting } from "../../types";
 import { sortTextFieldWithDirection } from "../../utils/sorting";
 
-export function sortResult(items: SearchResultItem[], sorting: Sorting) {
+export function sortResult<T>(items: T[], sorting: Sorting) {
   const sortedResult = [...items];
   sortedResult.sort(sortTextFieldWithDirection(sorting.field, sorting.order));
   return sortedResult;
